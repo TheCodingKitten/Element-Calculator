@@ -12,6 +12,12 @@ symbolToNumber = {"H" : 1, "He" : 2, "Li" : 3, "Be" : 4, "B" : 5, "C" : 6, "N" :
 atomicNumberRange = range(1, 119, 1)
 
 def main():
+    print("""
+        Inputs:
+        symbol - Atomic symbol (e.g. He)
+        name - Name of element (e.g. Helium)
+        number - Atomic number (e.g. 2)
+    """)
     while True:
         #Choose element input type
         startQuestion = str(input('\n'"Choose input (symbol, name, number): "))
@@ -28,7 +34,7 @@ def main():
         #Output result from atomic number input
         elif startQuestion in str("number"):
             atomicNumber = int(input("Enter Atomic Number of an element: ")) #User input to atomicNumber variable
-            if atomicNumber not in atomicNumberRange: #Checks if atomic number is equal to 0 and restarts script if true
+            if atomicNumber not in atomicNumberRange: #Checks if atomic number is valid and restarts script if not
                 print("ERROR: Input of {0} is not an Atomic Number".format(atomicNumber))
                 continue
         else:
