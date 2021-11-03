@@ -18,11 +18,11 @@ def main():
         Inputs:
         symbol - Atomic symbol (e.g. He)
         name - Name of element (e.g. Helium)
-        number - Atomic number (e.g. 2)
-    """)
+        number - Atomic number (e.g. 2)""")
     while True:
+        print('\n')
         #Choose element input type
-        startQuestion = str(input('\n'"Choose input (symbol, name, number): "))
+        startQuestion = str(input("Choose input (symbol, name, number): "))
         #Output result from element name input
         if startQuestion in str("name"):
             nameInput = str(input("Enter name of an element: ")) #User input to nameInput variable
@@ -48,13 +48,13 @@ def main():
         num3 = num2 / 8 #Number of shells
         num4 = num2 % 8 #Remaining electrons in outer most shell
         #Print info about element
-        print('\n'"Element Name: ", Elements[atomicNumberChange],'\n' "Element Symbol: ", Symbols[atomicNumberChange],'\n' "Atomic Number: ", str(atomicNumber))
+        print('\n'"Element Name: ", Elements[atomicNumberChange],'\n' "Element Symbol: ", Symbols[atomicNumberChange],'\n' "Atomic Number: ", str(atomicNumber),'\n' "Wikipedia link: https://en.wikipedia.org/wiki/{0}".format(Elements[atomicNumberChange]))
         if atomicNumberChange == 1 or atomicNumberChange == 2: #Full inner shell only
-            print(atomicNumberChange)
+            print('\n' "Shell Configuration: ", atomicNumberChange)
         else: 
             if num4 == 0: #Full inner, full middle(s), full outer shells
-                print("Shell Configuration: 2", int(num3)*"8 ")
+                print('\n' "Shell Configuration: 2", int(num3)*"8 ")
             else: #Full inner, full middle(s), not full outer shells
-                print("Shell Configuration: 2", int(num3)*"8 ", end=str(num4))
+                print('\n' "Shell Configuration: 2", int(num3)*"8 ", end=str(num4))
 
 main() #starts whole script
