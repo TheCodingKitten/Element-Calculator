@@ -41,9 +41,12 @@ def main():
                 continue
         else:
             print("ERROR: Invalid Input")
-            continue
+            main()
+		#continue
         #Variables
         atomicNumberChange = atomicNumber
+	if type(atomicNumberChange) is not int:
+		print("Hi")
         num2 = atomicNumberChange - 2 #Remainder after shell 1
         num3 = num2 / 8 #Number of shells
         num4 = num2 % 8 #Remaining electrons in outer most shell
