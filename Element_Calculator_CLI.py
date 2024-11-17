@@ -2,6 +2,9 @@
 
 #Element Calculator
 
+# Imports
+# from time import sleep
+
 #Element tuples
 Elements = ["NULL", "Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon", "Sodium", "Magnesium", "Aluminium", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium", "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin", "Antimony", "Tellurium", "Iodine", "Xenon", "Caesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury", "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson", "Ununennium"]
 Symbols = ["NULL", "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og", "Uue"]
@@ -13,51 +16,91 @@ symbolToNumber = {"H" : 1, "He" : 2, "Li" : 3, "Be" : 4, "B" : 5, "C" : 6, "N" :
 
 atomicNumberRange = range(1, 120, 1)
 
-def main():
+def get_user_input():
     print("""
         Inputs:
         symbol - Atomic symbol (e.g. He)
         name - Name of element (e.g. Helium)
-        number - Atomic number (e.g. 2)""")
-    while True:
-        print('\n')
-        #Choose element input type
-        startQuestion = str(input("Choose input (symbol, name, number): "))
-        #Output result from element name input
-        if startQuestion in str("name"):
-            nameInput = str(input("Enter name of an element: ")) #User input to nameInput variable
-            atomicNumber = nameToNumber.get(nameInput) #Change input to corresponding Atomic Number
-        
-        #Output result from element symbol
-        elif startQuestion in str("symbol"):
-            symbolInput = str(input("Enter symbol of an element: ")) #User input to symbolInput variable
-            atomicNumber = symbolToNumber.get(symbolInput)#Change input to corresponding Atomic Number
-        
-        #Output result from atomic number input
-        elif startQuestion in str("number"):
-            atomicNumber = int(input("Enter Atomic Number of an element: ")) #User input to atomicNumber variable
-            if atomicNumber not in atomicNumberRange: #Checks if atomic number is valid and restarts script if not
-                print("ERROR: Input of {0} is not an Atomic Number".format(atomicNumber))
-                continue
-        else:
-            print("ERROR: Invalid Input")
-            main()
-		#continue
-        #Variables
-        atomicNumberChange = atomicNumber
-	if type(atomicNumberChange) is not int:
-		print("Hi")
-        num2 = atomicNumberChange - 2 #Remainder after shell 1
-        num3 = num2 / 8 #Number of shells
-        num4 = num2 % 8 #Remaining electrons in outer most shell
-        #Print info about element
-        print('\n'"Element Name: ", Elements[atomicNumberChange],'\n' "Element Symbol: ", Symbols[atomicNumberChange],'\n' "Atomic Number: ", str(atomicNumber),'\n' "Wikipedia link: https://en.wikipedia.org/wiki/{0}".format(Elements[atomicNumberChange]))
-        if atomicNumberChange == 1 or atomicNumberChange == 2: #Full inner shell only
-            print('\n' "Shell Configuration: ", atomicNumberChange)
-        else: 
-            if num4 == 0: #Full inner, full middle(s), full outer shells
-                print('\n' "Shell Configuration: 2", int(num3)*"8 ")
-            else: #Full inner, full middle(s), not full outer shells
-                print('\n' "Shell Configuration: 2", int(num3)*"8 ", end=str(num4))
+        number - Atomic number (e.g. 2)
+        """)
 
-main() #starts whole script
+    # Choose element input type
+    startQuestion = str(input("Choose input (symbol, name, number, exit): ")).lower()
+    return(startQuestion)
+
+def handle_user_input(userinput):
+    if userinput == "name":
+        nameInput = str(input("Enter name of an element: ")) # User input to nameInput variable
+        try:
+            atomicNumber = nameToNumber.get(nameInput) # Change input to corresponding Atomic Number
+        except:
+            print_error("Invalid Element")
+    
+    elif userinput == "symbol":
+        symbolInput = str(input("Enter symbol of an element: ")) # User input to symbolInput variable
+        try:
+            atomicNumber = symbolToNumber.get(symbolInput) # Change input to corresponding Atomic Number
+        except:
+            print_error("Invalid Element")
+    
+    elif userinput == "number":
+        try:
+            atomicNumber = int(input("Enter Atomic Number of an element: ")) #User input to atomicNumber variable
+        except TypeError:
+            print_error("Invalid Input")
+        if atomicNumber not in atomicNumberRange: #Checks if atomic number is valid and restarts script if not
+            print(f"ERROR: Input of {atomicNumber} is not an Atomic Number")
+    elif userinput == "exit":
+        print("Exiting...")
+        sleep(0.25)
+        exit()    
+    else:
+        print_error("Invalid Input")
+
+    # Variables
+    atomicNumberChange = atomicNumber
+    print(element_info(atomicNumber))
+    print_electron_layout(atomicNumber)
+
+def print_electron_layout(ElementNumber):
+    num2 = ElementNumber - 2 # Remainder after shell 1
+    num3 = num2 / 8 # Number of shells
+    num4 = num2 % 8 # Remaining electrons in outer most shell
+    if ElementNumber == 1 or ElementNumber == 2: # Full inner shell only
+        print('\n' "Shell Configuration: ", ElementNumber)
+    else: 
+        if num4 == 0: #Full inner, full middle(s), full outer shells
+            print('\n' "Shell Configuration: 2", int(num3)*"8 ")
+        else: #Full inner, full middle(s), not full outer shells
+            print('\n' "Shell Configuration: 2", int(num3)*"8 ", end=str(num4))
+
+def element_info(InputType, ElementInput):
+    #Print info about element
+    if InputType == "Symbol":
+        ElementInputNumber = symbolToNumber.get(ElementInput) # Change input to corresponding Atomic Number
+        return(Elements[ElementInputNumber], Symbols[ElementInputNumber], ElementInputNumber)
+
+    elif InputType == "Name":
+        ElementInputNumber = symbolToNumber.get(ElementInput) # Change input to corresponding Atomic Number
+        return(Elements[ElementInputNumber], Symbols[ElementInputNumber], ElementInputNumber)
+
+    elif InputType == "Number":          
+        return(Elements[ElementInputNumber], Symbols[ElementInputNumber], ElementInputNumber)
+
+    else:
+        return None
+
+def print_element_info(ElementNumber):
+    #Print info about element
+    print('\n' "Element Name: ", Elements[ElementNumber],
+          '\n' "Element Symbol: ", Symbols[ElementNumber],
+          '\n' "Atomic Number: ", str(ElementNumber),
+          '\n' "Wikipedia link: https://en.wikipedia.org/wiki/{0}".format(Elements[ElementNumber]))
+
+def print_error(Error):
+    print(f"ERROR: {Error}")
+    quit()
+
+if __name__ == "__main__":
+    while True:
+        handle_user_input(get_user_input())
