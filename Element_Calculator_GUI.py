@@ -40,7 +40,8 @@ element_positions = {
 def show_element_info(element):
     # Display the information of the element
     info_text.delete("1.0", tk.END)  # Clear previous text
-    info_text.insert(tk.END, str(EC.element_info("Symbol", element))) # element_info.get(element, "No data available"))
+    element_info = EC.element_info("Symbol", element)
+    info_text.insert(tk.END, EC.return_element_info(element_info[2])) # element_info.get(element, "No data available"))
 
 def create_table_frame(parent):
     table_frame = tk.Frame(parent)

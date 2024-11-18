@@ -3,7 +3,7 @@
 #Element Calculator
 
 # Imports
-# from time import sleep
+from time import sleep
 
 #Element tuples
 Elements = ["NULL", "Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon", "Sodium", "Magnesium", "Aluminium", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium", "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin", "Antimony", "Tellurium", "Iodine", "Xenon", "Caesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury", "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson", "Ununennium"]
@@ -59,7 +59,7 @@ def handle_user_input(userinput):
 
     # Variables
     atomicNumberChange = atomicNumber
-    print(element_info(atomicNumber))
+    print_element_info(atomicNumber)
     print_electron_layout(atomicNumber)
 
 def print_electron_layout(ElementNumber):
@@ -85,17 +85,25 @@ def element_info(InputType, ElementInput):
         return(Elements[ElementInputNumber], Symbols[ElementInputNumber], ElementInputNumber)
 
     elif InputType == "Number":          
-        return(Elements[ElementInputNumber], Symbols[ElementInputNumber], ElementInputNumber)
+        return(Elements[ElementInput], Symbols[ElementInput], ElementInput)
 
     else:
         return None
 
 def print_element_info(ElementNumber):
-    #Print info about element
+    # Print info about element
     print('\n' "Element Name: ", Elements[ElementNumber],
           '\n' "Element Symbol: ", Symbols[ElementNumber],
           '\n' "Atomic Number: ", str(ElementNumber),
           '\n' "Wikipedia link: https://en.wikipedia.org/wiki/{0}".format(Elements[ElementNumber]))
+
+def return_element_info(ElementNumber):
+    # Return info about element to print
+    return("""Element Name: {0}
+Element Symbol: {1}
+Atomic Number: {2}
+Wikipedia link: https://en.wikipedia.org/wiki/{3}"""
+          .format(Elements[ElementNumber], Symbols[ElementNumber], str(ElementNumber), Elements[ElementNumber]))
 
 def print_error(Error):
     print(f"ERROR: {Error}")
@@ -104,3 +112,4 @@ def print_error(Error):
 if __name__ == "__main__":
     while True:
         handle_user_input(get_user_input())
+
