@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # 
 # Element Shell Configurations
-# https://github.com/TheCodingKitten/Element-Calculator
+# https://github.com/TheCodingKitten/Element-Explorer
 # 
 
-from Element_Calculator_CLI import Elements
-from Element_Calculator_CLI import Symbols
+from Element_Explorer_CLI import Elements
+from Element_Explorer_CLI import Symbols
 
 numberInput = int(input("Enter Atomic Number of an element: ")) # User input to numberInput variable
 if numberInput < 1 or numberInput > 118: # Checks if atomic number is greater than 118 and closes script

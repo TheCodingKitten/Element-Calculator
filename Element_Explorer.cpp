@@ -1,5 +1,5 @@
-// Element Calculator
-// https://github.com/TheCodingKitten/Element-Calculator
+// Element Explorer
+// https://github.com/TheCodingKitten/Element-Explorer
 //
 
 #include <iostream>

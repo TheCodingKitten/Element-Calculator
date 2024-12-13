@@ -1,7 +1,11 @@
-# https://www.pythonguis.com/tutorials/create-gui-tkinter/
+# Element Explorer
+# https://github.com/TheCodingKitten/Element-Explorer
+# 
+# Reference: https://www.pythonguis.com/tutorials/create-gui-tkinter/
+# 
 
 # Import CLI script
-import Element_Calculator_CLI as EC
+import Element_Explorer_CLI as EC
 
 import tkinter as tk
 from tkinter import TclError, ttk
