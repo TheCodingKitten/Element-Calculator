@@ -21,4 +21,4 @@ windows: $(SRCS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -static-libgcc -static-libstdc++ -o $(EXE_WIN)
 
 clean:
-	rm -f ./$(EXE_LINUX) ./$(EXE_WIN)
+	rm  .\$(EXE_LINUX) .\$(EXE_WIN)

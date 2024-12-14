@@ -85,19 +85,9 @@ void printElementDetails(const Element &e)
 	cout << "Symbol: " << e.symbol << endl;
 }
 
-int main(int argc, char *argv[])
+// CLI Interface
+void runCLI(const vector<Element> &elements)
 {
-	// Set default filename, but allow overriding from command-line argument
-	string datafile = (argc > 1) ? argv[1] : "Elements.csv";
-
-	// Import data from the CSV file
-	vector<Element> elements = importData(datafile);
-	if (elements.empty())
-	{
-		cerr << "Error: No data loaded from the file." << endl;
-		return 1;
-	}
-
 	// Get valid user input for atomic number
 	int userInput = getValidUserInput();
 
@@ -116,6 +106,85 @@ int main(int argc, char *argv[])
 	if (!elementFound)
 	{
 		cerr << "Error: Atomic number " << userInput << " not found in the dataset." << endl;
+	}
+}
+
+// GUI Interface (Placeholder for now)
+void runGUI(const vector<Element> &elements)
+{
+	// In the future, you can integrate a GUI framework here
+	// For now, we'll just output a placeholder message
+	cout << "GUI mode is not implemented yet." << endl;
+
+	// Example: Display first few elements (you can later integrate actual GUI code)
+	for (const auto &e : elements)
+	{
+		// cout << e.atomicNumber << ": " << e.name << " (" << e.symbol << ")" << endl;
+		string null = e.name;
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	string mode = "cli";			  // Default mode is CLI
+	string datafile = "Elements.csv"; // Default file name
+
+	// Check for --help flag and display help message
+	for (int i = 1; i < argc; ++i)
+	{
+		string arg = argv[i];
+		if (arg == "--help" || arg == "-h")
+		{
+			cout << "Usage: Element_Explorer [options] [datafile]\n\n"
+				 << "Options:\n"
+				 << "  --cli           Run the program in Command-Line Interface mode (default mode).\n"
+				 << "  --gui           Run the program in Graphical User Interface mode (not implemented yet).\n"
+				 << "  --help          Display this help message.\n\n"
+				 << "Arguments:\n"
+				 << "  [datafile]      Path to the CSV file containing element data. Default is 'Elements.csv'.\n";
+			return 0; // Exit after displaying help
+		}
+	}
+
+	// Process command-line arguments
+	for (int i = 1; i < argc; ++i)
+	{
+		string arg = argv[i];
+		if (arg == "--cli" || arg == "-c")
+		{
+			mode = "cli"; // Set mode to CLI (although it's the default)
+		}
+		else if (arg == "--gui" || arg == "-g")
+		{
+			mode = "gui"; // Set mode to GUI
+		}
+		else
+		{
+			datafile = arg; // Assume it's the datafile
+		}
+	}
+
+	// Import data from the CSV file
+	vector<Element> elements = importData(datafile);
+	if (elements.empty())
+	{
+		cerr << "Error: No data loaded from the file." << endl;
+		return 1;
+	}
+
+	// Run the appropriate mode (CLI or GUI)
+	if (mode == "cli")
+	{
+		runCLI(elements); // Run the CLI version
+	}
+	else if (mode == "gui")
+	{
+		runGUI(elements); // Run the GUI version
+	}
+	else
+	{
+		cerr << "Invalid mode specified. Use --cli or --gui." << endl;
+		return 1;
 	}
 
 	return 0;
