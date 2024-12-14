@@ -102,19 +102,18 @@ int main(int argc, char *argv[])
 	int userInput = getValidUserInput();
 
 	// Check if the input corresponds to an element (userInput is atomic number)
-	// Since atomic numbers start from 1, use that directly to access the element
-	bool found = false;
+	bool elementFound = false;
 	for (const auto &e : elements)
 	{
 		if (e.atomicNumber == userInput)
 		{
 			printElementDetails(e);
-			found = true;
+			elementFound = true;
 			break;
 		}
 	}
 
-	if (!found)
+	if (!elementFound)
 	{
 		cerr << "Error: Atomic number " << userInput << " not found in the dataset." << endl;
 	}
