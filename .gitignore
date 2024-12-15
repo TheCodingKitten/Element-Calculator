@@ -1,3 +1,19 @@
-venv/
-.vscode
+# Ignore build output files
+/bin/
+
+# Ignore compiled object files
+*.o
+*.exe
+
+# Ignore temporary files
+*.tmp
+*.log
+
+# Ignore dirs
+.vscode/
 __pycache__/
+
+# Ignore makefiles
+Makefile
+
+# Other ignores
